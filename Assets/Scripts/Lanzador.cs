@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Lanzador : MonoBehaviour
 {
- 
+    
     public GameObject projectilePrefab;
+    public Transform attachmentPoint;
     public float launchForce = 10f;
 
     void Update()
@@ -21,5 +22,8 @@ public class Lanzador : MonoBehaviour
         GameObject newProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         Rigidbody projectileRigidbody = newProjectile.GetComponent<Rigidbody>();
         projectileRigidbody.AddForce(transform.forward * launchForce, ForceMode.Impulse);
+
+        ProjectileBehavior projectileBehavior = newProjectile.GetComponent<ProjectileBehavior>();
+        projectileBehavior.SetAttachmentPoint(attachmentPoint);
     }
 }
